@@ -1,0 +1,56 @@
+<%- include("partials/header.ejs") %>
+
+
+<section class="weather-card">
+  <h1 class="weather-title">Check the Weather</h1>
+  <p class="weather-subtitle">Enter a city name to get the current weather</p>
+  <form class="search-form" method="POST">
+    <input type="text" name="city" placeholder="" required autocomplete="off" />
+    <button type="submit">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      Get Weather
+    </button>
+  </form>
+    <% if (error) { %>
+    <p class="weather-error"><%= error %></p>
+  <% } %>
+  <% if (weather) { %>
+  <div class="weather-result">
+    <div class="result-top">
+      <i class="weather-icon fa-solid fa-cloud-sun"></i>
+      <div class="result-info">
+        <h2 class="result-city"><%= weather.city %>, <%= weather.country %></h2>
+        <p class="result-temp"><%= Math.round(weather.temperature) %>°C</p>
+        <p class="result-desc">Weather code: <%= weather.weatherCode %></p>
+      </div>
+    </div>
+    <div class="result-stats">
+      <div class="stat">
+        <i class="fa-solid fa-droplet"></i>
+        <div>
+          <span class="stat-label">Humidity</span>
+          <span class="stat-value"><%= weather.humidity %>%</span>
+        </div>
+      </div>
+      <div class="stat">
+        <i class="fa-solid fa-wind"></i>
+        <div>
+          <span class="stat-label">Wind Speed</span>
+          <span class="stat-value"><%= Math.round(weather.windSpeed) %> km/h</span>
+        </div>
+      </div>
+      <div class="stat">
+        <i class="fa-solid fa-temperature-half"></i>
+        <div>
+          <span class="stat-label">Feels Like</span>
+          <span class="stat-value"><%= Math.round(weather.feelsLike) %>°C</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% } %>
+</section>
+
+
+
+<%- include("partials/footer.ejs") %>
